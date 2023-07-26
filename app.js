@@ -1,4 +1,8 @@
-const menu = [
+let btn_All= document.querySelector("#all");
+let btn_Korea= document.querySelector("#korea");
+let btn_Japan= document.querySelector("#japan");
+let btn_China= document.querySelector("#china");
+const MENU = [
   {
     id: 1,
     title: "Tteokbokki",
@@ -81,3 +85,17 @@ const menu = [
     desc: `Red bean paste dessert, serving with honey.`,
   },
 ];
+
+EventListeners();
+function EventListeners() {
+  btn_All.addEventListener("click",AllButton);
+  btn_Korea.addEventListener("click",KoreaButton);
+  btn_Japan.addEventListener("click",JapanButton);
+  btn_China.addEventListener("click",ChinaButton);
+}
+function AllButton(){
+  console.log("Merhaba, ben calisiyiorum.");
+}
+function KoreaButton(){}
+function JapanButton(){}
+function ChinaButton(){}
