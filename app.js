@@ -2,7 +2,7 @@ let btn_All = document.querySelector("#all");
 let btn_Korea = document.querySelector("#korea");
 let btn_Japan = document.querySelector("#japan");
 let btn_China = document.querySelector("#china");
-let items_Container=document.querySelector("#items-container")
+let items_Container = document.querySelector("#items-container")
 const MENU = [
   {
     id: 1,
@@ -94,27 +94,61 @@ function EventListeners() {
   btn_Japan.addEventListener("click", JapanButton);
   btn_China.addEventListener("click", ChinaButton);
 }
-function AllButton() {
-  items_Container.innerHTML = "";
-  MENU.forEach(ShowItems);
-  function ShowItems(item){
-    let divItem = document.createElement("div");
-    divItem.classList.add("menu-items");
-    divItem.innerHTML = `
-      <img src=${item.img} alt=${item.title} class="photo">
-      <div class="menu-info">
-        <div class="menu-title">
-          <h4>${item.title}</h4>
-          <h4 class="price">${item.price}</h4>
-        </div>
-        <div class="menu-text">
-          ${item.desc}
-        </div>
+function ShowFoods(item) {
+  let divItem = document.createElement("div");
+  divItem.classList.add("menu-items");
+  divItem.innerHTML = `
+    <img src=${item.img} alt=${item.title} class="photo">
+    <div class="menu-info">
+      <div class="menu-title">
+        <h4>${item.title}</h4>
+        <h4 class="price">${item.price}</h4>
       </div>
-    `;
-    items_Container.appendChild(divItem);
+      <div class="menu-text">
+        ${item.desc}
+      </div>
+    </div>
+  `;
+  items_Container.appendChild(divItem);
+}
+function RemoveChildren(){
+  while (items_Container.firstChild) {
+    items_Container.removeChild(items_Container.firstChild);
   }
+}
+function AllButton() {
+  RemoveChildren();
+  MENU.forEach(ShowFoods);
+  ShowFoods();
 };
-function KoreaButton() { }
-function JapanButton() { }
-function ChinaButton() { }
+function KoreaButton() {
+  RemoveChildren();
+  MENU.map(KoreaFoods);
+  function KoreaFoods(item) {
+    let koreaMenuItems = [];
+    if (item.category === "Korea")
+      koreaMenuItems.push(item);
+    console.log(koreaMenuItems);
+    koreaMenuItems.forEach(ShowFoods);
+  }
+}
+function JapanButton() {
+  RemoveChildren();
+  MENU.map(JapanFoods);
+  function JapanFoods(item) {
+    let japanMenuItems = [];
+    if (item.category === "Japan")
+      japanMenuItems.push(item);
+    japanMenuItems.forEach(ShowFoods);
+  }
+}
+function ChinaButton() {
+  RemoveChildren();
+  MENU.map(ChinaFoods);
+  function ChinaFoods(item) {
+    let japanMenuItems = [];
+    if (item.category === "China")
+      japanMenuItems.push(item);
+    japanMenuItems.forEach(ShowFoods);
+  }
+}
