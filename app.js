@@ -1,7 +1,8 @@
-let btn_All= document.querySelector("#all");
-let btn_Korea= document.querySelector("#korea");
-let btn_Japan= document.querySelector("#japan");
-let btn_China= document.querySelector("#china");
+let btn_All = document.querySelector("#all");
+let btn_Korea = document.querySelector("#korea");
+let btn_Japan = document.querySelector("#japan");
+let btn_China = document.querySelector("#china");
+let items_Container=document.querySelector("#items-container")
 const MENU = [
   {
     id: 1,
@@ -88,14 +89,32 @@ const MENU = [
 
 EventListeners();
 function EventListeners() {
-  btn_All.addEventListener("click",AllButton);
-  btn_Korea.addEventListener("click",KoreaButton);
-  btn_Japan.addEventListener("click",JapanButton);
-  btn_China.addEventListener("click",ChinaButton);
+  btn_All.addEventListener("click", AllButton);
+  btn_Korea.addEventListener("click", KoreaButton);
+  btn_Japan.addEventListener("click", JapanButton);
+  btn_China.addEventListener("click", ChinaButton);
 }
-function AllButton(){
-  console.log("Merhaba, ben calisiyiorum.");
-}
-function KoreaButton(){}
-function JapanButton(){}
-function ChinaButton(){}
+function AllButton() {
+  items_Container.innerHTML = "";
+  MENU.forEach(ShowItems);
+  function ShowItems(item){
+    let divItem = document.createElement("div");
+    divItem.classList.add("menu-items");
+    divItem.innerHTML = `
+      <img src=${item.img} alt=${item.title} class="photo">
+      <div class="menu-info">
+        <div class="menu-title">
+          <h4>${item.title}</h4>
+          <h4 class="price">${item.price}</h4>
+        </div>
+        <div class="menu-text">
+          ${item.desc}
+        </div>
+      </div>
+    `;
+    items_Container.appendChild(divItem);
+  }
+};
+function KoreaButton() { }
+function JapanButton() { }
+function ChinaButton() { }
